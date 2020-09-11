@@ -28,15 +28,15 @@ RUN mkdir -p /var/www/html
 #  chown -R nobody.nobody /var/log/nginx
 RUN touch /run/nginx.pid
 RUN touch /run/supervisord.pid
-RUN chgrp -R nginx /var/log/nginx /var/lib/nginx /run/nginx.pid /run/supervisord.pid
+RUN chgrp -R $(whoami) /var/log/nginx /var/lib/nginx /run/nginx.pid /run/supervisord.pid
 RUN chmod -R g+rwx /var/log/nginx /var/lib/nginx /run/nginx.pid /run/supervisord.pid
 
 # Switch to use a non-root user from here on
-USER nginx
+#USER nginx
 
 # Add application
 WORKDIR /var/www/html
-COPY --chown=nginx src/ /var/www/html/
+COPY --chown=$(whoami) src/ /var/www/html/
 
 # Expose the port nginx is reachable on
 EXPOSE 8080
