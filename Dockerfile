@@ -36,7 +36,7 @@ RUN chmod -R g+rwx /var/log/nginx /var/lib/nginx /run/nginx.pid /run/supervisord
 
 # Add application
 WORKDIR /var/www/html
-COPY --chown=$(whoami) src/ /var/www/html/
+COPY src/ /var/www/html/
 
 # Expose the port nginx is reachable on
 EXPOSE 8080
