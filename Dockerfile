@@ -22,17 +22,19 @@ COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN mkdir -p /var/www/html
 
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
-RUN chown -R nobody.nobody /var/www/html && \
-  chown -R nobody.nobody /run && \
-  chown -R nobody.nobody /var/lib/nginx && \
-  chown -R nobody.nobody /var/log/nginx
+#RUN chown -R nobody.nobody /var/www/html && \
+#  chown -R nobody.nobody /run && \
+#  chown -R nobody.nobody /var/lib/nginx && \
+#  chown -R nobody.nobody /var/log/nginx
+RUN chgrp -R nginx /var/log/nginx /var/lib/nginx /run
+RUN chgrp -R g+rwx /var/log/nginx /var/lib/nginx /run
 
 # Switch to use a non-root user from here on
-USER nobody
+USER nginx
 
 # Add application
 WORKDIR /var/www/html
-COPY --chown=nobody src/ /var/www/html/
+COPY --chown=nginx src/ /var/www/html/
 
 # Expose the port nginx is reachable on
 EXPOSE 8080
