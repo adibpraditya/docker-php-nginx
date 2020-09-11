@@ -26,8 +26,8 @@ RUN mkdir -p /var/www/html
 #  chown -R nobody.nobody /run && \
 #  chown -R nobody.nobody /var/lib/nginx && \
 #  chown -R nobody.nobody /var/log/nginx
-RUN chgrp -R nginx /var/log/nginx /var/lib/nginx /run
-RUN chgrp -R g+rwx /var/log/nginx /var/lib/nginx /run
+RUN chgrp -R nginx /var/log/nginx /var/lib/nginx /run/nginx.pid /run/supervisord.pid
+RUN chgrp -R g+rwx /var/log/nginx /var/lib/nginx /run/nginx.pid /run/supervisord.pid
 
 # Switch to use a non-root user from here on
 USER nginx
