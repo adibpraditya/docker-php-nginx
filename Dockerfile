@@ -28,11 +28,11 @@ RUN mkdir -p /var/www/html
 #  chown -R nobody.nobody /var/log/nginx
 RUN touch /run/nginx.pid
 RUN touch /run/supervisord.pid
-RUN chgrp -R $(whoami) /var/log/nginx /var/lib/nginx /run/nginx.pid /run/supervisord.pid
+RUN chgrp -R 0 /var/log/nginx /var/lib/nginx /run/nginx.pid /run/supervisord.pid
 RUN chmod -R g+rwx /var/log/nginx /var/lib/nginx /run/nginx.pid /run/supervisord.pid
 
 # Switch to use a non-root user from here on
-#USER nginx
+USER 1001
 
 # Add application
 WORKDIR /var/www/html
