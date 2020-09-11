@@ -29,7 +29,7 @@ RUN mkdir -p /var/www/html
 RUN touch /run/nginx.pid
 RUN touch /run/supervisord.pid
 RUN chgrp -R nginx /var/log/nginx /var/lib/nginx /run/nginx.pid /run/supervisord.pid
-RUN chgrp -R g+rwx /var/log/nginx /var/lib/nginx /run/nginx.pid /run/supervisord.pid
+RUN chmod -R g+rwx /var/log/nginx /var/lib/nginx /run/nginx.pid /run/supervisord.pid
 
 # Switch to use a non-root user from here on
 USER nginx
